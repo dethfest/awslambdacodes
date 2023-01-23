@@ -6,8 +6,10 @@ def lambda_handler(event, context):
     
     response = s3client.create_bucket(
         ACL='public-read',                          ## The canned ACL to apply to the bucket
-        Bucket='unique_bucket_name_required',       ## A unique name for the S3 bucket
+        Bucket='uniquebucketnamerequired001',       ## A unique name for the S3 bucket
         CreateBucketConfiguration={
             'LocationConstraint': 'ap-south-1'      ## Region where the bucket will be created
         },
     )
+    if 'ResponseMetadata' in response:
+        return('Bucket created at: ' + response['Location'])
